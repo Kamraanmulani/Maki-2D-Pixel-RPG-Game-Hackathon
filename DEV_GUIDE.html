@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Office Hackathon — Dev Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --green: #39ff14;
+  --blue: #00f5ff;
+  --pink: #ff006e;
+  --yellow: #ffd700;
+  --bg: #0d0d1a;
+  --panel: #111122;
+  --dim: #2a2a4a;
+}
+body {
+  background: var(--bg);
+  color: #ccc;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  padding: 32px;
+  min-height: 100vh;
+}
+h1 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--green);
+  text-shadow: 0 0 12px var(--green);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.subtitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--blue);
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 3px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--dim);
+  border-radius: 6px;
+  padding: 20px;
+}
+.card.full { grid-column: 1 / -1; }
+.card h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  color: var(--yellow);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--dim);
+}
+pre {
+  background: #060610;
+  border: 1px solid var(--dim);
+  border-radius: 4px;
+  padding: 14px;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+.g { color: var(--green); }
+.b { color: var(--blue); }
+.p { color: var(--pink); }
+.y { color: var(--yellow); }
+.dim { color: #444466; }
+.w { color: #ffffff; }
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.step-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--green);
+  background: #001100;
+  border: 1px solid var(--green);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+.step-body { flex: 1; }
+.step-body strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 13px; }
+.step-body span { color: #888; font-size: 12px; }
+.cmd {
+  display: inline-block;
+  background: #001100;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin: 2px 0;
+}
+.controls-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 20px;
+  align-items: center;
+}
+.key {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: var(--yellow);
+  background: #1a1a00;
+  border: 1px solid var(--yellow);
+  padding: 4px 8px;
+  border-radius: 3px;
+  text-align: center;
+}
+.npc-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: #060610;
+  border-radius: 4px;
+}
+.npc-emoji { font-size: 24px; }
+.npc-info strong { color: var(--pink); font-size: 12px; }
+.npc-info span { color: #888; font-size: 11px; display: block; }
+footer {
+  text-align: center;
+  margin-top: 32px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 7px;
+  color: #333355;
+}
+</style>
+</head>
+<body>
+
+<h1>THE OFFICE HACKATHON</h1>
+<div class="subtitle">DEVELOPER REFERENCE GUIDE — MAKI HACKATHON 2026</div>
+
+<div class="grid">
+
+  <!-- File Structure -->
+  <div class="card">
+    <h2>📁 FILE STRUCTURE</h2>
+<pre>
+<span class="g">office-hackathon/</span>
+├── <span class="b">game.js</span>                 <span class="dim">← entry point</span>
+├── <span class="b">index.html</span>              <span class="dim">← loading screen</span>
+├── <span class="b">maki.config.js</span>          <span class="dim">← maki settings</span>
+├── <span class="b">vite.config.js</span>
+├── <span class="b">package.json</span>
+│
+├── <span class="y">img/</span>
+│   ├── <span class="w">office_map.*</span>        <span class="dim">← ch1 tilemap</span>
+│   ├── <span class="w">hackathon_map.*</span>     <span class="dim">← ch2 tilemap</span>
+│   └── <span class="w">escape_map.*</span>        <span class="dim">← ch3 tilemap</span>
+│
+└── <span class="y">scenes/</span>
+    ├── <span class="g">DialogueSystem.js</span>   <span class="dim">← shared utils</span>
+    ├── <span class="p">IntroScene.js</span>       <span class="dim">← title + story</span>
+    ├── <span class="p">OfficeScene.js</span>      <span class="dim">← chapter 1</span>
+    ├── <span class="p">HackathonFloorScene.js</span> <span class="dim">← ch2</span>
+    ├── <span class="p">EscapeScene.js</span>      <span class="dim">← ch3 boss</span>
+    └── <span class="p">WinScene.js</span>         <span class="dim">← credits</span>
+</pre>
+  </div>
+
+  <!-- Setup Steps -->
+  <div class="card">
+    <h2>🚀 SETUP STEPS</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Install Maki</strong>
+        <span><span class="cmd">npm install @tialops/maki</span></span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Run dev server</strong>
+        <span><span class="cmd">maki dev</span></span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Build 3 tilemaps</strong>
+        <span><span class="cmd">maki tilemap</span> → office_map, hackathon_map, escape_map</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Enable debug to check collisions</strong>
+        <span>Set <code>debug: true</code> in <code>maki.config.js</code></span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <strong>Record gameplay video & submit!</strong>
+        <span>GitHub repo + Devpost + Google Form</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="card">
+    <h2>🕹️ CONTROLS</h2>
+    <div class="controls-grid">
+      <div class="key">↑ ↓ ← →</div><div>Move Dev</div>
+      <div class="key">E</div><div>Talk / Interact / Dismiss dialogue</div>
+      <div class="key">SPACE</div><div>Squash bugs (Ch2) / Throw grenades (Ch3)</div>
+      <div class="key">ENTER</div><div>Advance dialogue / Confirm</div>
+      <div class="key">R</div><div>Restart (on Win Screen)</div>
+    </div>
+  </div>
+
+  <!-- NPCs -->
+  <div class="card">
+    <h2>👾 CHARACTERS</h2>
+    <div class="npc-row">
+      <div class="npc-emoji">😰</div>
+      <div class="npc-info"><strong>DEV (You)</strong><span>The intern. Runs on coffee and fear.</span></div>
+    </div>
+    <div class="npc-row">
+      <div class="npc-emoji">😊</div>
+      <div class="npc-info"><strong>Karen (HR)</strong><span>"Do you have a minute?" — drains energy</span></div>
+    </div>
+    <div class="npc-row">
+      <div class="npc-emoji">😎</div>
+      <div class="npc-info"><strong>Chad</strong><span>Steals code. Talks about Rust. -50 pts.</span></div>
+    </div>
+    <div class="npc-row">
+      <div class="npc-emoji">👔</div>
+      <div class="npc-info"><strong>Bob the Manager</strong><span>"Circle back on that." Meeting room trap.</span></div>
+    </div>
+    <div class="npc-row">
+      <div class="npc-emoji">📅</div>
+      <div class="npc-info"><strong>Monday Standup</strong><span>FINAL BOSS. Fires action-item projectiles.</span></div>
+    </div>
+  </div>
+
+  <!-- Scoring -->
+  <div class="card full">
+    <h2>🏆 SCORING & RANKS</h2>
+<pre>
+<span class="g">PICKUPS:  </span> ☕ Coffee +50 | 📶 WiFi +60 | 🐛 Bug squash +75
+
+<span class="b">MILESTONES:</span> 📋 Signup sheet +200 | 🚀 Submit +300 | 📅 Boss kill +500
+
+<span class="y">BONUSES:  </span> ⏱ Time bonus +2/sec remaining | 💥 Boss hit +100
+
+<span class="p">PENALTIES: </span> 😎 Chad steals -50 | 📌 Action item hit -100
+
+<span class="dim">────────────────────────────────────────────────</span>
+
+  <span class="y">S RANK</span>  1500+ pts  ⭐⭐⭐  LEGEND
+  <span class="g">A RANK</span>  1000+ pts  ⭐⭐   SHIPPED IT
+  <span class="b">B RANK</span>   600+ pts  ⭐    SURVIVED
+  <span class="dim">C RANK</span>   &lt;600 pts       at least you didn't do the code reviews
+</pre>
+  </div>
+
+</div>
+
+<footer>BUILT WITH MAKI FRAMEWORK • MAKI HACKATHON 2026 • SHIP IT OR SIT IN THE STANDUP FOREVER</footer>
+
+</body>
+</html>

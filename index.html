@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Office Hackathon 🏢💻</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --neon-green: #39ff14;
+      --neon-blue: #00f5ff;
+      --neon-pink: #ff006e;
+      --dark-bg: #0d0d1a;
+      --panel-bg: #1a1a2e;
+      --text-dim: #4a4a6a;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Press Start 2P', monospace;
+      overflow: hidden;
+    }
+
+    /* Scanline overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    #loading-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-title {
+      font-size: 18px;
+      color: var(--neon-green);
+      text-shadow: 0 0 10px var(--neon-green), 0 0 30px var(--neon-green);
+      text-align: center;
+      line-height: 2;
+      letter-spacing: 2px;
+      animation: flicker 3s infinite;
+    }
+
+    .game-subtitle {
+      font-size: 9px;
+      color: var(--neon-blue);
+      text-shadow: 0 0 8px var(--neon-blue);
+      text-align: center;
+      letter-spacing: 3px;
+    }
+
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96% { opacity: 0.4; }
+      97% { opacity: 1; }
+      98% { opacity: 0.2; }
+      99% { opacity: 1; }
+    }
+
+    .pixel-art {
+      font-size: 48px;
+      animation: bounce 1s infinite alternate;
+      filter: drop-shadow(0 0 8px rgba(57, 255, 20, 0.6));
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+
+    .loading-bar-container {
+      width: 300px;
+      border: 2px solid var(--neon-green);
+      padding: 3px;
+      box-shadow: 0 0 10px var(--neon-green);
+    }
+
+    .loading-bar {
+      height: 12px;
+      background: var(--neon-green);
+      width: 0%;
+      animation: load 2s ease forwards;
+      box-shadow: 0 0 8px var(--neon-green);
+    }
+
+    @keyframes load {
+      to { width: 100%; }
+    }
+
+    .loading-text {
+      font-size: 7px;
+      color: var(--text-dim);
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #game-container canvas {
+      display: block;
+      margin: 0 auto;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      box-shadow: 0 0 40px rgba(57, 255, 20, 0.3), 0 0 80px rgba(0, 245, 255, 0.1);
+      border: 2px solid rgba(57, 255, 20, 0.3);
+    }
+
+    #game-container {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">
+    <div class="pixel-art">🏢</div>
+    <div class="game-title">THE OFFICE<br>HACKATHON</div>
+    <div class="game-subtitle">A TALE OF SURVIVAL</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+    <div class="loading-text">BOOTING UP... PLEASE DON'T HAVE A MEETING ABOUT THIS</div>
+  </div>
+
+  <div id="game-container">
+    <!-- Phaser canvas renders here -->
+  </div>
+
+  <script type="module" src="./game.js"></script>
+  <script>
+    // Hide loading, show game after 2.2s
+    setTimeout(() => {
+      document.getElementById('loading-screen').style.display = 'none'
+      document.getElementById('game-container').style.display = 'block'
+    }, 2200)
+  </script>
+</body>
+</html>
