@@ -1,0 +1,16 @@
+{
+  "name": "escape_map",
+  "tileSize": 16,
+  "width": 50,
+  "height": 37,
+  "description": "The Exit Corridor — Chapter 3 Boss Fight",
+  "layers": ["Floor", "Furniture", "Wall", "Collision"],
+  "notes": [
+    "Run: maki tilemap",
+    "Name your map: escape_map",
+    "Large open arena — the boss floats at the top",
+    "Exit door visible on the right wall",
+    "Minimal furniture — this is a boss arena",
+    "Keep the floor open for dodging projectiles"
+  ]
+}

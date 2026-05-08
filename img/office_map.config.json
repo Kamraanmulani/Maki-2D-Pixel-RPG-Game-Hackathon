@@ -1,0 +1,15 @@
+{
+  "name": "office_map",
+  "tileSize": 16,
+  "width": 50,
+  "height": 37,
+  "description": "MegaCorp Inc. Office Floor — Chapter 1",
+  "layers": ["Floor", "Furniture", "Wall", "Collision"],
+  "notes": [
+    "Run: maki tilemap",
+    "Name your map: office_map",
+    "Place desks, chairs, coffee machine (☕ pickup zones), meeting room door",
+    "Mark collision on walls and furniture",
+    "Export when done"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "hackathon_map",
+  "tileSize": 16,
+  "width": 50,
+  "height": 37,
+  "description": "MegaCorp Hackathon Floor — Chapter 2",
+  "layers": ["Floor", "Furniture", "Wall", "Collision"],
+  "notes": [
+    "Run: maki tilemap",
+    "Name your map: hackathon_map",
+    "Open floor plan — tables with laptops, whiteboards, energy drink cans",
+    "Place lots of open space for bug-dodging gameplay",
+    "Submit button zone in bottom-right area",
+    "Mark collision on walls and fixed furniture only"
+  ]
+}
