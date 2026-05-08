@@ -349,5 +349,3 @@ manager.map(this, 'office_map')
 **Built for Maki Hackathon 2026.**
 
 *"Ship it. Or sit through another standup."*
-#   M a k i - 2 D - P i x e l - R P G - G a m e - H a c k a t h o n  
- 
