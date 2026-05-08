@@ -351,5 +351,3 @@ manager.map(this, 'office_map')
 *Made with ☕, sleep deprivation, and genuine hatred of recurring calendar invites.*
 
 **Built for Maki Hackathon 2026.**
-
-*"Ship it. Or sit through another standup."*
