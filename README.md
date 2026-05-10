@@ -10,7 +10,7 @@ A **2D pixel RPG** built with the **Maki Framework** for **Maki Hackathon 2026**
 
 ```bash
 npm install
-maki dev
+maki dev or npm run dev
 ```
 
 Open **http://localhost:5173** in your browser. Press `ENTER` to begin.
